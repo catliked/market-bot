@@ -27,7 +27,12 @@ def get_stock_price(symbol):
     prev_close = data.previous_close
     change = ((price - prev_close) / prev_close) * 100
     emoji = "📈" if change > 0 else "📉"
-    return f"{emoji} {symbol}: ${price:.2f} ({change:.2f}%)"
+    
+    # Use Rp for Indonesian stocks, $ for US stocks
+    if symbol.endswith(".JK"):
+        return f"{emoji} {symbol}: Rp {price:,.0f} ({change:.2f}%)"
+    else:
+        return f"{emoji} {symbol}: ${price:.2f} ({change:.2f}%)"
 
 def get_stock_news(symbol):
     ticker = yf.Ticker(symbol)
