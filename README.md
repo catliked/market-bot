@@ -12,8 +12,6 @@ Every morning at 8AM (Jakarta time), the bot automatically sends a personalised 
 - 💱 USD/IDR exchange rate
 - 📉📈 Price change percentage with directional emojis
 
----
-
 ## 🛠️ Tech Stack
 
 - **Language:** Python 3.14
@@ -21,8 +19,6 @@ Every morning at 8AM (Jakarta time), the bot automatically sends a personalised 
 - **APIs:** Yahoo Finance, Telegram Bot API
 - **Deployment:** Railway (cloud, runs 24/7)
 - **Version Control:** Git + GitHub
-
----
 
 ## ✨ Features
 
@@ -32,7 +28,6 @@ Every morning at 8AM (Jakarta time), the bot automatically sends a personalised 
 - Fully automated — no manual trigger needed
 - Deployed to cloud server, runs independently of local machine
 
----
 
 ## 📱 Sample Output
 
@@ -60,7 +55,6 @@ Every morning at 8AM (Jakarta time), the bot automatically sends a personalised 
 
 Have a great trading day! 💪
 ```
----
 
 ## 💡 Why I Built This
 
@@ -68,7 +62,6 @@ As someone actively learning investing, I wanted a personalised daily briefing t
 
 Built as a first Python project to learn APIs, automation, bot development, and cloud deployment.
 
----
 
 ## 🧠 What I Learned
 
@@ -80,7 +73,6 @@ Built as a first Python project to learn APIs, automation, bot development, and 
 - Cloud deployment with Railway
 - Git version control and GitHub
 
----
 
 ## 🔧 Setup (Local)
 
@@ -103,6 +95,5 @@ Run:
 python bot.py
 ```
 
----
 
 *Built by Michelle — June 2026*
