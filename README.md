@@ -40,42 +40,6 @@ Every morning at 8AM (Jakarta time), the bot automatically sends a personalised 
 🌅 Good morning! Wednesday, 04 June 2026
 
 📊 Market Status:
-🇺🇸 US Market: 🟢 Open# 📈 Market Digest Bot
-
-A personal automated financial market digest bot built in Python that delivers a daily morning briefing via Telegram — covering live stock prices, market status, financial news, and currency rates.
-
-## 🚀 What It Does
-
-Every morning at 8AM Jakarta time, the bot automatically sends a personalised market update to Telegram including:
-
-- 📊 Live stock prices for a custom watchlist (US + Indonesian stocks)
-- 🟢 Real-time market open/close status for US and IDX markets
-- 📰 Latest news headlines per stock
-- 💱 USD/IDR exchange rate
-- 📉📈 Price change percentage with directional emojis
-
-## 🛠️ Tech Stack
-
-- **Language:** Python 3.14
-- **Libraries:** yfinance, python-telegram-bot, requests, schedule, pytz, python-dotenv
-- **APIs:** Yahoo Finance, Telegram Bot API
-- **Deployment:** Railway (cloud, runs 24/7)
-- **Version Control:** Git + GitHub
-
-## ✨ Features
-
-- Tracks US stocks (AAPL, TSLA, SPY, NVDA, META) and Indonesian blue chips (BBCA.JK, TLKM.JK, BBRI.JK)
-- Automatically detects Indonesian stocks and displays prices in Rupiah (Rp)
-- Secure API key management using environment variables
-- Fully automated, no manual trigger needed
-- Deployed to cloud, runs independently of local machine
-
-## 📱 Sample Output
-
-\```
-🌅 Good morning! Wednesday, 04 June 2026
-
-📊 Market Status:
 🇺🇸 US Market: 🟢 Open
 🇮🇩 IDX: 🔴 Closed
 
