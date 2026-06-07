@@ -1,8 +1,3 @@
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except:
-    pass
 import os
 import asyncio
 import requests
@@ -11,11 +6,19 @@ from telegram import Bot
 from datetime import datetime
 import pytz
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    pass
 
 TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = int(os.getenv("CHAT_ID"))
+MOM_CHAT_ID = int(os.getenv("MOM_CHAT_ID"))
+
+RECIPIENTS = [CHAT_ID, MOM_CHAT_ID]
 STOCK_API_KEY = os.getenv("STOCK_API_KEY")
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
 # Your custom watchlist — edit freely!
 STOCKS = ["AAPL", "TSLA", "SPY", "NVDA", "META", "BBCA.JK", "TLKM.JK", "BBRI.JK"]
@@ -85,7 +88,8 @@ async def main():
     message += "\n" + get_usd_idr()
     message += "\n\nHave a great trading day! 💪"
     
-    await bot.send_message(chat_id=CHAT_ID, text=message)
+    for recipient in RECIPIENTS:
+        await bot.send_message(chat_id=recipient, text=message)
 
 import schedule
 import time
