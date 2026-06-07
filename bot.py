@@ -97,11 +97,8 @@ import time
 def run_bot():
     asyncio.run(main())
 
-# Run every morning at 8:00 AM Jakarta time
+# Schedule only, no immediate run
 schedule.every().day.at("01:00").do(run_bot)
-
-# Run once immediately when you start it
-run_bot()
 
 print("✅ Bot is running! Will send every morning at 8AM Jakarta time 🕗")
 
