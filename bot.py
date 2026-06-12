@@ -18,7 +18,80 @@ MOM_CHAT_ID = int(os.getenv("MOM_CHAT_ID"))
 
 RECIPIENTS = [CHAT_ID, MOM_CHAT_ID]
 STOCK_API_KEY = os.getenv("STOCK_API_KEY")
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+
+def get_top_market_news():
+    url = "https://newsapi.org/v2/everything"
+
+    params = {
+        "q": "(stock market OR Federal Reserve OR inflation OR interest rates OR Bitcoin OR S&P 500 OR Nasdaq OR economy)",
+        "language": "en",
+        "sortBy": "publishedAt",
+        "pageSize": 10,
+        "apiKey": "NEWS_API_KEY"
+    }
+
+    response = requests.get(url, params=params)
+    data = response.json()
+
+    if data["status"] != "ok":
+        return []
+
+    return data["articles"]
+
+KEYWORDS = {
+    "federal reserve": 10,
+    "interest rate": 10,
+    "inflation": 9,
+    "recession": 9,
+    "oil": 8,
+    "china": 8,
+    "tariff": 8,
+    "bitcoin": 7,
+    "earnings": 6,
+    "nasdaq": 6,
+    "s&p": 6,
+    "stocks": 5
+}
+
+def score_article(article):
+    text = (
+        (article.get("title") or "") +
+        " " +
+        (article.get("description") or "")
+    ).lower()
+
+    score = 0
+
+    for keyword, weight in KEYWORDS.items():
+        if keyword in text:
+            score += weight
+
+    return score
+
+def get_best_market_stories():
+    articles = get_top_market_news()
+
+    scored = sorted(
+        articles,
+        key=score_article,
+        reverse=True
+    )
+
+    return scored[:5]
+
+def format_news_section():
+    stories = get_best_market_stories()
+
+    text = "🔥 *Top Market Stories*\n\n"
+
+    for i, article in enumerate(stories, 1):
+
+        title = article["title"]
+        url = article["url"]
+
+        text += f"{i}. [{title}]({url})\n\n"
+
+    return text
 
 # Your custom watchlist — edit freely!
 STOCKS = ["AAPL", "TSLA", "SPY", "NVDA", "META", "BBCA.JK", "TLKM.JK", "BBRI.JK"]
@@ -79,18 +152,19 @@ async def main():
     for stock in STOCKS:
         message += get_stock_price(stock) + "\n"
     
-    message += "\n📰 Latest News:\n"
-    for stock in STOCKS[:3]:
-        news = get_stock_news(stock)
-        if news:
-            message += news + "\n"
+    message += "\n\n"
+    message += format_news_section()
     
     message += "\n" + get_usd_idr()
     message += "\n\nHave a great trading day! 💪"
     
     for recipient in RECIPIENTS:
-        await bot.send_message(chat_id=recipient, text=message)
-
+        await bot.send_message(
+            chat_id=recipient,
+            text=message,
+            parse_mode="Markdown"
+            )
+        
 import schedule
 import time
 
